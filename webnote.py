@@ -47,7 +47,7 @@ while True:
             data = field.group(3)
         else:
             raise Exception('Cannot read request header')
-            
+
     response = ''
 
     response += 'HTTP/1.1 200 OK\r\n'
