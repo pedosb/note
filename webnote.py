@@ -2,7 +2,6 @@ import socket
 import re
 import json
 import urlparse
-import urllib
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -43,7 +42,7 @@ while True:
         if field is not None:
             field_name = field.group(1)
             field_body = field.group(2)
-            request_headers[field_name] = field_body
+            request_headers[field_name.lower()] = field_body
             data = field.group(3)
         else:
             raise Exception('Cannot read request header')
@@ -85,7 +84,7 @@ while True:
             """
         elif method == 'POST':
             while True:
-                if len(data) != request_headers['Content-Lenght']:
+                if len(data) != int (request_headers['content-length']):
                     data += conn.recv(1024)
                 else:
                     break
