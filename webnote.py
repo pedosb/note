@@ -8,6 +8,7 @@ s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 s.bind(('0.0.0.0', 8080))
 s.listen(1)
+
 while True:
     data = ''
     conn, addr = s.accept()
@@ -56,7 +57,7 @@ while True:
             note_dict = json.loads(note_file.read())
     except IOError:
         note_dict = dict()
-
+     
     if resource == '/notes':
         response += 'Content-Type: text/plain; charset=utf-8\r\n'
         response += '\r\n'
@@ -101,6 +102,7 @@ while True:
             response += note_dict[note_match.group(1)]
         else:
             response += 'Hello World!!!'
+       
 
     conn.sendall(response)
 
