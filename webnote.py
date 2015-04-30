@@ -28,8 +28,7 @@ while True:
         resource = request_match.group(2)
         protocol = request_match.group(3)
         data = request_match.group(4)
-        request_match = \
-                re.match(r'^([^ ]+) ([^ ]+) ([^ ]+)\r\n(.*)$', data , re.DOTALL)
+        
     else:
         raise Exception('Cannot read request')
 
