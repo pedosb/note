@@ -94,16 +94,17 @@ while True:
                 json.dump(note_dict, note_file)
 
     else:
+        response += 'Content-Type: text/plain; charset=utf-8\r\n'
+        response += '\r\n'
         try:
             note_match = re.match('^/notes/([a-z]+)$', resource)
             if note_match is not None:
-                aux = note_dict[note_match.group(1)]
-                response += 'Content-Type: text/plain; charset=utf-8\r\n'
-                response += '\r\n'
-                response += aux
+                response += note_dict[note_match.group(1)]
             else:
                 response += 'Hello World!!!'
         except KeyError:
+            response = ''
+            response += 'HTTP/1.1 404 Not Found\r\n'
             response += 'Content-Type: text/html; charset=utf-8\r\n'
             response += '\r\n'
             response += """
